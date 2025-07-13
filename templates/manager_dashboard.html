@@ -2,62 +2,60 @@
 <html>
 <head>
     <title>Manager Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h2>Manager Dashboard</h2>
-
-    <h3>Add Menu Item for Today</h3>
-    <form method="POST" action="/add_menu">
-        <label>Item Code:</label>
-        <input type="text" name="item_code" required><br><br>
-        <label>Item Name:</label>
-        <input type="text" name="item_name" required><br><br>
-        <label>Price:</label>
-        <input type="number" name="price" required><br><br>
-        <button type="submit">Add Item</button>
+<body class="bg-light">
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Welcome, Manager</h2>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-info">
+        {{ messages[0] }}
+    </div>
+    {% endif %}
+    {% endwith %}
+    <div class="card shadow p-4 mb-4">
+        <h4 class="mb-3">Add / Update Menu Item</h4>
+        <form method="POST" action="/update_menu">
+            <div class="mb-3">
+                <label class="form-label">Item Code</label>
+                <input type="text" name="code" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Item Name</label>
+                <input type="text" name="name" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Rate</label>
+                <input type="number" name="rate" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-success">Add / Update</button>
+        </form>
+    </div>
+    <div class="card shadow p-4 mb-4">
+        <h4 class="mb-3">Delete Order</h4>
+        <form method="POST" action="/delete_order">
+            <div class="mb-3">
+                <label class="form-label">Enter Order ID to Delete</label>
+                <input type="number" name="order_id" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-danger">Delete Order</button>
+        </form>
+    </div>
+    <div class="card shadow p-4 mb-4">
+        <h4 class="mb-3">Generate Sales Report</h4>
+        <form method="POST" action="/sales_report">
+            <div class="mb-3">
+                <label class="form-label">Enter Date (YYYY-MM-DD)</label>
+                <input type="text" name="report_date" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Generate Report</button>
+        </form>
+    </div>
+    <form method="POST" action="/logout" class="text-center">
+        <button type="submit" class="btn btn-secondary">Logout</button>
     </form>
-
-    <h3>Today's Menu</h3>
-    <table border="1">
-        <tr>
-            <th>Item Code</th>
-            <th>Name</th>
-            <th>Price</th>
-        </tr>
-        {% for item in menu %}
-        <tr>
-            <td>{{ item.item_code }}</td>
-            <td>{{ item.item_name }}</td>
-            <td>{{ item.price }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <h3>Orders Today</h3>
-    <table border="1">
-        <tr>
-            <th>Order No.</th>
-            <th>Customer Name</th>
-            <th>Item Code</th>
-            <th>Price</th>
-            <th>Delete</th>
-        </tr>
-        {% for order in orders %}
-        <tr>
-            <td>{{ order.order_no }}</td>
-            <td>{{ order.customer_name }}</td>
-            <td>{{ order.item_code }}</td>
-            <td>{{ order.total_price }}</td>
-            <td><a href="/delete_order/{{ order.id }}">Delete</a></td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <h3>Generate Sales Report</h3>
-    <form method="POST" action="/sales_report">
-        <label>Enter Date (YYYY-MM-DD):</label>
-        <input type="text" name="report_date" required>
-        <button type="submit">Generate Report</button>
-    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
