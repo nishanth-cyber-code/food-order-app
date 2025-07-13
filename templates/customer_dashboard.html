@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Dashboard</title>
+</head>
+<body>
+    <h2>Today's Menu</h2>
+    <table border="1">
+        <tr>
+            <th>Item Code</th>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+        {% for item in menu %}
+        <tr>
+            <td>{{ item.item_code }}</td>
+            <td>{{ item.item_name }}</td>
+            <td>{{ item.price }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h3>Place Order</h3>
+    <form method="POST" action="/place_order">
+        <label>Your Name:</label>
+        <input type="text" name="customer_name" required><br><br>
+        <label>Item Code:</label>
+        <input type="text" name="item_code" required><br><br>
+        <button type="submit">Order</button>
+    </form>
+</body>
+</html>

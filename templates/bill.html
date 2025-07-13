@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bill</title>
+</head>
+<body>
+    <h2>Order Confirmation</h2>
+    <p><strong>Order No.:</strong> {{ order.order_no }}</p>
+    <p><strong>Customer:</strong> {{ order.customer_name }}</p>
+    <p><strong>Item:</strong> {{ item.item_name }} ({{ order.item_code }})</p>
+    <p><strong>Price:</strong> ₹{{ order.total_price }}</p>
+    <p><strong>Date:</strong> {{ order.date }}</p>
+</body>
+</html>
