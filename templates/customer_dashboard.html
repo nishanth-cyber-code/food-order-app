@@ -1,55 +1,75 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Customer Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
+
 <div class="container mt-5">
-    <h2 class="mb-4 text-center">Welcome, Customer</h2>
-    <div class="card shadow p-4 mb-4">
-        <h4>Today's Menu</h4>
-        <table class="table table-bordered mt-3">
-            <thead class="table-dark">
-                <tr>
-                    <th>Item Code</th>
-                    <th>Name</th>
-                    <th>Rate (₹)</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in menu %}
-                <tr>
-                    <td>{{ item.code }}</td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.rate }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    <div class="card shadow p-4 mb-4">
-        <h4>Place Your Order</h4>
-        <form method="POST" action="/place_order">
-            <div class="mb-3">
-                <label class="form-label">Enter Item Code:</label>
-                <input type="text" name="code" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Quantity:</label>
-                <input type="number" name="quantity" class="form-control" required>
-            </div>
-            <button type="submit" class="btn btn-success">Place Order</button>
-        </form>
-    </div>
+
+    <h2 class="text-center mb-4">👤 Customer Dashboard</h2>
+
     {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <div class="alert alert-info">
-        {{ messages[0] }}
-    </div>
-    {% endif %}
+      {% if messages %}
+        <div class="alert alert-warning">
+            {{ messages[0] }}
+        </div>
+      {% endif %}
     {% endwith %}
+
+    <!-- Menu Section -->
+    <h4>📋 Today's Menu</h4>
+    <table class="table table-bordered table-striped mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Item Code</th>
+                <th>Item Name</th>
+                <th>Price (₹)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in menu %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ item.item_code }}</td>
+                <td>{{ item.item_name }}</td>
+                <td>{{ item.price }}</td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" class="text-center text-muted">No items available today.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Place Order Form -->
+    <div class="card mt-5 shadow">
+        <div class="card-header bg-success text-white">
+            🛒 Place Your Order
+        </div>
+        <div class="card-body">
+            <form method="POST" action="/place_order">
+                <div class="mb-3">
+                    <label class="form-label">Item Code</label>
+                    <input type="text" name="item_code" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Customer Name</label>
+                    <input type="text" name="customer_name" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-success">Place Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <p class="text-center mt-5 text-muted">✨ Powered by <strong>Nishanth</strong></p>
+
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
