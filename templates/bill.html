@@ -1,47 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Bill</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>Order Bill</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
-
 <div class="container mt-5">
-    <div class="card shadow p-4">
-        <h2 class="text-center mb-4">Order Bill</h2>
-        
-        <p><strong>Order Number:</strong> {{ order.id }}</p>
-        <p><strong>Date:</strong> {{ order.date }}</p>
 
-        <table class="table table-bordered mt-4">
-            <thead class="table-dark">
-                <tr>
-                    <th>Item Code</th>
-                    <th>Item Name</th>
-                    <th>Rate</th>
-                    <th>Quantity</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in order.items %}
-                <tr>
-                    <td>{{ item['code'] }}</td>
-                    <td>{{ item['name'] }}</td>
-                    <td>₹{{ item['rate'] }}</td>
-                    <td>{{ item['quantity'] }}</td>
-                    <td>₹{{ item['rate'] * item['quantity'] }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-
-        <div class="text-end fs-5">
-            <strong>Total Amount: ₹{{ order.total_price }}</strong>
+    <div class="card shadow">
+        <div class="card-header bg-success text-white">
+            🧾 Order Bill
+        </div>
+        <div class="card-body">
+            <h5>Order No: <strong>{{ order.order_no }}</strong></h5>
+            <p><strong>Customer:</strong> {{ order.customer_name }}</p>
+            <p><strong>Item Code:</strong> {{ item.item_code }}</p>
+            <p><strong>Item Name:</strong> {{ item.item_name }}</p>
+            <p><strong>Price:</strong> ₹{{ item.price }}</p>
+            <p><strong>Date:</strong> {{ order.date }}</p>
         </div>
     </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="text-center mt-4">
+        <a href="/customer_dashboard" class="btn btn-primary">Back to Menu</a>
+    </div>
+
+</div>
 </body>
 </html>
+
